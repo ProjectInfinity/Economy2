@@ -1,0 +1,28 @@
+version: 1
+
+currency:
+  symbol: '$'
+  single: 'Dollar'
+  plural: 'Dollars'
+  start-balance: 100.00
+
+messages:
+  amount-invalid: "%red%The specified amount is invalid!"
+  amount-missing: "%red%You need to specify an amount."
+  no-permission: "%red%You don't have permission to do that."
+  balance:
+    own: "%yellow%Your balance is %green%%s %yellow%%s"
+    other: "%yellow%%s's balance is %green%%s %yellow%%s"
+    too-low: "%red%You do not have enough money."
+    sent: "%yellow%You sent %green%%s %yellow%%s to %green%%s"
+    received: "%green%%s %yellow%sent you %green%%s %yellow%%s"
+    reduced: "%yellow%%s took %green%%s %yellow%%s from you"
+    took: "%yellow%You took %green%%s %yellow%%s from %green%%s"
+    given: "%green%%s %yellow%%s was given to %green%%s"
+    set: "%green%%s%yellow%'s balance has been set to %green%%s %yellow%%s"
+    changed: "%yellow%Your balance has been set to %green%%s %yellow%%s by %green%%s"
+    rank: "%yellow%Your rank is %green%%u"
+    top: "%yellow%%u. %s - %green%%s %yellow%%s"
+  player:
+    missing: "%red%You need to specify a player."
+    not-exists: "%red%The specified player does not exist."

@@ -1,0 +1,51 @@
+name: Economy2
+main: Leet\Economy2\Economy2
+version: 0.0.2
+api: [1.12.0]
+author: ProjectInfinity
+commands:
+  balance:
+    description: "Shows your or another person's balance"
+    usage: "/balance [player]"
+    aliases: [bal]
+    permission: "economy2.command.balance"
+  pay:
+    description: "Pay money to another player"
+    usage: "/pay [player] [amount]"
+    permission: "economy2.command.pay"
+  givemoney:
+    description: "Gives a player money without subtracting from the sender"
+    usage: "/givemoney [player] [amount]"
+    permission: "economy2.command.givemoney"
+  setmoney:
+    description: "Sets a player's balance"
+    usage: "/setmoney [player] [balance]"
+    permission: "economy2.command.setmoney"
+  takemoney:
+    description: "Takes money from a player's balance"
+    usage: "/takemoney [player] [amount]"
+    permission: "economy2.command.takemoney"
+  topmoney:
+    description: "See the top 10 richest players"
+    usage: "/topmoney"
+    aliases: [baltop]
+    permission: "economy2.command.topmoney"
+permissions:
+  economy2.command.balance:
+    default: true
+    description: "See your or another player's balance"
+  economy2.command.pay:
+    default: true
+    description: "Pay another player"
+  economy2.command.givemoney:
+    default: op
+    description: "Gives another player money"
+  economy2.command.setmoney:
+    default: op
+    description: "Sets a player's balance"
+  economy2.command.takemoney:
+    default: op
+    description: "Takes money from a player's balance"
+  economy2.command.topmoney:
+    default: true
+    description: "See the top 10 richest players"
