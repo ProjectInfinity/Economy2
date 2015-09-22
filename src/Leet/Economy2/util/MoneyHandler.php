@@ -259,4 +259,18 @@ class MoneyHandler {
         $this->data->save();
     }
 
+    /**
+     * Returns the start balance when a
+     * new account is created.
+     *
+     * @return float
+     */
+    public function getStartBalance() {
+        return $this->startBalance;
+    }
+
+    public function getBalanceAll() {
+        return $this->data->get('balance');
+    }
+
 }
