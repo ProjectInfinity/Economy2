@@ -11,6 +11,7 @@ use Leet\Economy2\command\PayCommand;
 use Leet\Economy2\util\MessageHandler;
 use Leet\Economy2\util\MoneyHandler;
 
+use onebone\economyapi\EconomyAPI;
 use pocketmine\plugin\PluginBase;
 use pocketmine\utils\Config;
 
@@ -30,6 +31,9 @@ class Economy2 extends PluginBase {
     /** @var MessageHandler */
     private $messageHandler;
 
+    /** @var EconomyAPI */
+    private $economyDummy;
+
     public function onEnable() {
 
         self::$plugin = $this;
@@ -46,6 +50,7 @@ class Economy2 extends PluginBase {
         }
 
         $this->moneyHandler = new MoneyHandler($this);
+        $this->economyDummy = new EconomyAPI();
 
         # Register all commands.
         $this->getCommand('balance')->setExecutor(new BalanceCommand($this));
@@ -65,6 +70,7 @@ class Economy2 extends PluginBase {
         # Cleanup in case of a reload.
         unset($this->moneyHandler);
         unset($this->version);
+        unset($this->economyDummy);
 
         self::$plugin = null;
 
