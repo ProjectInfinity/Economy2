@@ -199,7 +199,7 @@ class MoneyHandler {
 
         if($this->data->getNested('balance.'.$player) !== null) $exists = true;
 
-        if($exists === false AND !$this->plugin->getServer()->getPlayer($player) === null) {
+        if($exists === false AND $this->plugin->getServer()->getPlayer($player) !== null) {
             $exists = true;
             $this->createPlayer($player, $this->startBalance);
         }
