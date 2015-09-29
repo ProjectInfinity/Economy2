@@ -28,7 +28,7 @@ class TopMoneyCommand implements CommandExecutor {
 
         if($rank !== null) $sender->sendMessage(sprintf($this->plugin->getMessageHandler()->balance_rank, $rank));
 
-        $i = 1; # %yellow%%u. %s - %green%%s %yellow%%s
+        $i = 1;
         foreach($top as $player => $balance) {
             $sender->sendMessage(sprintf($this->plugin->getMessageHandler()->balance_top, $i, $player, $balance,
                 ($balance > 1) ? $this->money->getPluralName() : $this->money->getSingularName()));
