@@ -51,48 +51,20 @@ class Economy2 extends PluginBase {
 
         $this->moneyHandler = new MoneyHandler($this);
 
-        # Attempt to register the fake EconomyAPI plugin.
-        if(!file_exists($this->getDataFolder().'/EconomyAPI.phar')) {
-            $this->saveResource('EconomyAPI.phar');
+        # Check if EconomyAPI exists.
+        if(file_exists($this->getServer()->getPluginPath().'EconomyAPI.phar')) {
+            unlink($this->getServer()->getPluginPath().'EconomyAPI.phar');
         }
-        $this->economyDummy = $this->getServer()->getPluginManager()->loadPlugin($this->getDataFolder().'/EconomyAPI.phar');
-        $this->getServer()->enablePlugin($this->economyDummy);
 
-        # Check for old economy plugins that need "reviving".
-        foreach (glob($this->getServer()->getPluginPath().'Economy*.phar') as $filename) {
-            if($filename === 'Economy2' or $filename === 'Economy2Contracts' or $filename === 'Economy2Shop') continue;
-
-            foreach($this->getServer()->getPluginManager()->getPlugins() as $plugin) {
-                if($plugin->getName() === substr($filename, 0, strlen($filename) - 5)) {
-                    $this->getServer()->getPluginManager()->enablePlugin($plugin);
-                }
-            }
-            $this->getServer()->getPluginManager()->loadPlugin($filename);
-        }
-        # Enable the revived plugins.
-        foreach($this->getServer()->getPluginManager()->getPlugins() as $plugin) {
-            if($plugin->getName() === 'EconomyAirport')
-                $this->getServer()->getPluginManager()->enablePlugin($this->getServer()->getPluginManager()->getPlugin('EconomyAirport'));
-            if($plugin->getName() === 'EconomyAuction')
-                $this->getServer()->getPluginManager()->enablePlugin($this->getServer()->getPluginManager()->getPlugin('EconomyAuction'));
-            if($plugin->getName() === 'EconomyCasino')
-                $this->getServer()->getPluginManager()->enablePlugin($this->getServer()->getPluginManager()->getPlugin('EconomyCasino'));
-            if($plugin->getName() === 'EconomyLand')
-                $this->getServer()->getPluginManager()->enablePlugin($this->getServer()->getPluginManager()->getPlugin('EconomyLand'));
-            if($plugin->getName() === 'EconomyProperty')
-                $this->getServer()->getPluginManager()->enablePlugin($this->getServer()->getPluginManager()->getPlugin('EconomyProperty'));
-            if($plugin->getName() === 'EconomyPShop')
-                $this->getServer()->getPluginManager()->enablePlugin($this->getServer()->getPluginManager()->getPlugin('EconomyPShop'));
-            if($plugin->getName() === 'EconomySell')
-                $this->getServer()->getPluginManager()->enablePlugin($this->getServer()->getPluginManager()->getPlugin('EconomySell'));
-            if($plugin->getName() === 'EconomyShop')
-                $this->getServer()->getPluginManager()->enablePlugin($this->getServer()->getPluginManager()->getPlugin('EconomyShop'));
-            if($plugin->getName() === 'EconomyTax')
-                $this->getServer()->getPluginManager()->enablePlugin($this->getServer()->getPluginManager()->getPlugin('EconomyTax'));
-            if($plugin->getName() === 'EconomyUsury')
-                $this->getServer()->getPluginManager()->enablePlugin($this->getServer()->getPluginManager()->getPlugin('EconomyUsury'));
-            if($plugin->getName() === 'EconomyJob')
-                $this->getServer()->getPluginManager()->enablePlugin($this->getServer()->getPluginManager()->getPlugin('EconomyJob'));
+        # Attempt to save the fake EconomyAPI plugin.
+        if(!file_exists($this->getServer()->getPluginPath().'FakeEconomyAPI.phar')) {
+            $this->saveResource('FakeEconomyAPI.phar');
+            rename($this->getDataFolder().'FakeEconomyAPI.phar', $this->getServer()->getPluginPath().'FakeEconomyAPI.phar');
+            $this->economyDummy = $this->getServer()->getPluginManager()->loadPlugin($this->getServer()->getPluginPath().'FakeEconomyAPI.phar');
+            $this->getServer()->enablePlugin($this->economyDummy);
+            $this->getLogger()->warning('FakeEconomyAPI has been created, restart for onebone-economy to work.');
+        } else {
+            $this->economyDummy = $this->getServer()->getPluginManager()->getPlugin('EconomyAPI');
         }
 
         # Register all commands.
