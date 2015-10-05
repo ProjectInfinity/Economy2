@@ -140,8 +140,9 @@ class MoneyHandler {
      *
      * @param $player
      * @param float $balance
+     * @param bool $saveNow
      */
-    public function createPlayer($player, $balance = 0.00) {
+    public function createPlayer($player, $balance = 0.00, $saveNow = true) {
 
         # Validate the data.
         if(!is_float($balance)) {
@@ -154,7 +155,7 @@ class MoneyHandler {
 
         $this->data->setNested('balance.'.strtolower($player), $balance);
 
-        $this->save();
+        if($saveNow) $this->save();
 
     }
 
