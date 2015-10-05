@@ -30,7 +30,10 @@ class BalanceCommand implements CommandExecutor {
         # Check if the player is attempting to view another player's balance.
         $own = (count($args) > 0) ? false : true;
 
-        $balance = $this->money->getBalance($own ? $sender->getName() : $args[0], count($args) > 0 ? $this->plugin->getServer()->getPlayer($args[0]) !== null : false);
+        # Check if specified user is sender. If so $own should be true.
+        if(!$own and strtolower($args[0]) === strtolower($sender->getName())) $own = true;
+
+        $balance = $this->money->getBalance($own ? $sender->getName() : $args[0], $own ? true : $this->plugin->getServer()->getPlayer($args[0]) !== null);
 
         # Player does not exist.
         if($balance === null) {
