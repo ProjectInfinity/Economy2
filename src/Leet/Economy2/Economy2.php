@@ -81,6 +81,7 @@ class Economy2 extends PluginBase {
                     $i = 0;
                     # Start importing!
                     foreach($oneboneConfig->get('money') as $player => $balance) {
+                        if($balance < 0) continue;
                         $this->moneyHandler->createPlayer($player, $balance);
                         $this->getLogger()->info('Imported data for: '.$player.' - '.$balance);
                         $i++;
