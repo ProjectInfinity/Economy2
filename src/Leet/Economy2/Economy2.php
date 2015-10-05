@@ -67,6 +67,31 @@ class Economy2 extends PluginBase {
             $this->economyDummy = $this->getServer()->getPluginManager()->getPlugin('EconomyAPI');
         }
 
+        # Check if we should migrate EconomyAPI data.
+        if($this->getMoneyHandler()->getBalanceAll() === false or count($this->getMoneyHandler()->getBalanceAll()) === 0 and
+            file_exists($this->getServer()->getPluginPath().'EconomyAPI/Money.yml')) {
+            $oneboneConfig = new Config($this->getServer()->getPluginPath().'EconomyAPI/Money.yml');
+            # Only continue if there are any keys.
+            if(count($oneboneConfig->getAll()) !== 0) {
+
+                # Only continue if there are any users.
+                if(count($oneboneConfig->get('money')) > 0) {
+
+                    $this->getLogger()->info('Starting import of EconomyAPI data!');
+                    $i = 0;
+                    # Start importing!
+                    foreach($oneboneConfig->get('money') as $player => $balance) {
+                        $this->moneyHandler->createPlayer($player, $balance);
+                        $this->getLogger()->info('Imported data for: '.$player.' - '.$balance);
+                        $i++;
+                    }
+                    $this->getLogger()->info('Finished importing. Imported a total of '.count($this->moneyHandler->getBalanceAll()).' players.');
+
+                }
+
+            }
+        }
+
         # Register all commands.
         $this->getCommand('balance')->setExecutor(new BalanceCommand($this));
         $this->getCommand('givemoney')->setExecutor(new GiveMoneyCommand($this));
