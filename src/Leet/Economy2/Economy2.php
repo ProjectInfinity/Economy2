@@ -68,8 +68,8 @@ class Economy2 extends PluginBase {
         }
 
         # Check if we should migrate EconomyAPI data.
-        if($this->getMoneyHandler()->getBalanceAll() === false or count($this->getMoneyHandler()->getBalanceAll()) === 0 and
-            file_exists($this->getServer()->getPluginPath().'EconomyAPI/Money.yml')) {
+        if(($this->getMoneyHandler()->getBalanceAll() === false or count($this->getMoneyHandler()->getBalanceAll()) === 0)
+            and file_exists($this->getServer()->getPluginPath().'EconomyAPI/Money.yml')) {
             $oneboneConfig = new Config($this->getServer()->getPluginPath().'EconomyAPI/Money.yml');
             # Only continue if there are any keys.
             if(count($oneboneConfig->getAll()) !== 0) {
