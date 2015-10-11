@@ -48,4 +48,4 @@ permissions:
     description: "Takes money from a player's balance"
   economy2.command.topmoney:
     default: true
-    description: "See the top 10 richest players"
+    description: "See the top richest players"
