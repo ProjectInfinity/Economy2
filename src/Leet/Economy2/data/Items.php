@@ -209,7 +209,7 @@ class Items {
             '187:0' => 'acaciagate',
         '110:0' => 'mycelium',
         '111:0' => 'lilypad',
-        '112:0' => 'netherbrick',
+        '112:0' => 'netherbricks',
         '116:0' => 'enchantingtable',
         '120:0' => 'endportalframe',
         '121:0' => 'endstone',
@@ -218,7 +218,7 @@ class Items {
         '133:0' => 'emeraldblock',
         '139:0' => 'cobblewall',
         '139:1' => 'mossycobblewall',
-        '140:0' => 'flowerpot',
+        '390:0' => 'flowerpot',
             '140:1' => 'poppypot',
             '140:2' => 'dandelionpot',
             '140:3' => 'oakpot',
@@ -288,7 +288,6 @@ class Items {
             '175:0' => 'sunflower',
             '198:0' => 'grasspath',
             '243:0' => 'podzol',
-            '244:0' => 'beetroot',
             '245:0' => 'stonecutter',
             '246:0' => 'glowingobsidian',
             '247:0' => 'netherreactor', # Only items from here on.
@@ -448,7 +447,21 @@ class Items {
                 '383:98' => 'ocelotegg',
                 '383:100' => 'horseegg',
                 '383:101' => 'rabbitegg',
-                '383:120' => 'villageregg'
+                '383:120' => 'villageregg',
+            '384:0' => 'enchantingflask',
+            '388:0' => 'emerald',
+            '393:0' => 'bakedpotato',
+            '394:0' => 'poisonouspotato',
+            '396:0' => 'goldencarrot',
+            '400:0' => 'pumpkinpie',
+            '403:0' => 'enchantedbook',
+            '405:0' => 'netherbrick',
+            '406:0' => 'netherquartz',
+            '414:0' => 'rabbitfoot',
+            '438:0' => 'splashpotion',
+            '457:0' => 'beetroot',
+            '458:0' => 'beetrootseeds',
+            '459:0' => 'beetrootsoup'
     ];
 
     public static function getIdMeta($name) {
