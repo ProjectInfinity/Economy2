@@ -464,12 +464,20 @@ class Items {
             '459:0' => 'beetrootsoup'
     ];
 
+    /**
+     * @param $name
+     * @return String|null
+     */
     public static function getIdMeta($name) {
         $position = array_search(strtolower($name), self::$items);
         if(!$position) return null;
         return $position;
     }
 
+    /**
+     * @param $key
+     * @return String|null
+     */
     public static function getName($key) {
         if(!isset(self::$items[$key])) return null;
         return self::$items[$key];
