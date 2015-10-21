@@ -479,6 +479,7 @@ class Items {
      * @return String|null
      */
     public static function getName($key) {
+        if(count(explode(':', $key)) < 2) $key = $key.':0';
         if(!isset(self::$items[$key])) return null;
         return self::$items[$key];
     }
