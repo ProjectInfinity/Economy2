@@ -45,7 +45,7 @@ class SetMoneyCommand implements CommandExecutor {
             return true;
         }
 
-        $balance = floatval($balance);
+        $balance = (float) $balance;
 
         $this->money->setBalance($target, $balance);
 

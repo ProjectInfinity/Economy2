@@ -28,6 +28,7 @@ class MessageHandler {
 
     public $amount_missing;
     public $amount_invalid;
+    public $amount_too_high;
 
     public $player_missing;
     public $player_not_exists;
@@ -55,6 +56,7 @@ class MessageHandler {
 
         $this->amount_missing = $this->parseColors($plugin->getConfig()->getNested('messages.amount-missing', '%red%You need to specify an amount.'));
         $this->amount_invalid = $this->parseColors($plugin->getConfig()->getNested('messages.amount-invalid', '%red%The specified amount is invalid!'));
+        $this->amount_too_high = $this->parseColors($plugin->getConfig()->getNested('messages.amount-too-high', '%yellow%The amount was higher than the target\'s balance.'));
 
         $this->player_missing = $this->parseColors($plugin->getConfig()->getNested('messages.player.missing', '%red%You need to specify a player.'));
         $this->player_not_exists = $this->parseColors($plugin->getConfig()->getNested('messages.player.not-exists', '%red%The specified player does not exist.'));
@@ -66,10 +68,10 @@ class MessageHandler {
      * @param $message
      * @return String
      */
-    private static function parseColors($message) {
+    private function parseColors($message) {
         $msg = $message;
         foreach(self::$colors as $color => $value) {
-            $key = "%".strtolower($color)."%";
+            $key = '%'.strtolower($color).'%';
             if(strpos($msg, $key) !== false) {
                 $msg = str_replace($key, $value, $msg);
             }

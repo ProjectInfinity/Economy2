@@ -73,7 +73,7 @@ class MoneyHandler {
                 $this->plugin->getLogger()->error('Provided balance is not a float');
                 return null;
             }
-            $balance = floatval($balance);
+            $balance = (float) $balance;
         }
 
         # Check if the player exists.
@@ -105,7 +105,7 @@ class MoneyHandler {
     public function alterBalance($player, $balance) {
 
         # Just for the sake of consistency.
-        if(is_int($balance)) $balance = floatval($balance);
+        if(is_int($balance)) $balance = (float) $balance;
 
         if(!is_float($balance)) {
             $this->plugin->getLogger()->error('Could not alter balance for '.$player.', '.$balance.' is not a float');

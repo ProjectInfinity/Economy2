@@ -45,12 +45,17 @@ class TakeMoneyCommand implements CommandExecutor {
             return true;
         }
 
-        $amount = floatval($amount);
+        $amount = (float) $amount;
 
         # Stop pointless transactions or attempted exploitation.
         if($amount <= 0) {
             $sender->sendMessage($this->plugin->getMessageHandler()->amount_invalid);
             return true;
+        }
+
+        if($this->money->getBalance($target) < $amount) {
+            $sender->sendMessage($this->plugin->getMessageHandler()->amount_too_high);
+            $amount = (float) $this->money->getBalance($target);
         }
 
         $this->money->alterBalance($target, -$amount);
