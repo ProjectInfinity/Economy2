@@ -1,4 +1,4 @@
-version: 1
+version: 2
 
 currency:
   symbol: '$'
@@ -9,6 +9,7 @@ currency:
 messages:
   amount-invalid: "%red%The specified amount is invalid!"
   amount-missing: "%red%You need to specify an amount."
+  amount-too-high: "%yellow%The amount was higher than the target's balance."
   no-permission: "%red%You don't have permission to do that."
   balance:
     own: "%yellow%Your balance is %green%%s %yellow%%s"
