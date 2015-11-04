@@ -17,7 +17,7 @@ class MoneyHandler {
         $this->currencySymbol = $plugin->getConfig()->getNested('currency.symbol');
         $this->currencySingle = $plugin->getConfig()->getNested('currency.single');
         $this->currencyPlural = $plugin->getConfig()->getNested('currency.plural');
-        $this->startBalance = $plugin->getConfig()->getNested('currency.start-balance', 100.00);
+        $this->startBalance = (float) $plugin->getConfig()->getNested('currency.start-balance', 100.00);
     }
 
     /**
@@ -147,9 +147,9 @@ class MoneyHandler {
         # Validate the data.
         if(!is_float($balance)) {
             if(is_int($balance)) {
-                $balance = floatval($balance);
+                $balance = (float) $balance;
             } else {
-                $balance = 0;
+                $balance = 0.00;
             }
         }
 
