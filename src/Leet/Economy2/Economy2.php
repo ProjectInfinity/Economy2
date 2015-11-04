@@ -19,6 +19,8 @@ class Economy2 extends PluginBase {
 
     # Declare the API version so that other plugins may be notified.
     const API_VERSION = 1;
+    # Declare FakeEconomyAPI version so that we know whether to replace the old version or not.
+    const BRIDGE_VERSION = 2;
 
     private static $plugin;
 
@@ -62,8 +64,23 @@ class Economy2 extends PluginBase {
             rename($this->getDataFolder().'FakeEconomyAPI.phar', $this->getServer()->getPluginPath().'FakeEconomyAPI.phar');
             $this->economyDummy = $this->getServer()->getPluginManager()->loadPlugin($this->getServer()->getPluginPath().'FakeEconomyAPI.phar');
             $this->getServer()->enablePlugin($this->economyDummy);
-            $this->getLogger()->warning('FakeEconomyAPI has been created, restart for onebone-economy to work.');
+            $this->getLogger()->warning('FakeEconomyAPI has been created, restart for onebone-economy plugins to work.');
+            /** Set bridge version */
+            $this->getConfig()->set('bridgeVersion', self::BRIDGE_VERSION);
+            $this->saveConfig();
         } else {
+            /** Get bridge version */
+            if($this->getConfig()->get('bridgeVersion', 0) < self::BRIDGE_VERSION) {
+                unlink($this->getServer()->getPluginPath().'FakeEconomyAPI.phar');
+                $this->saveResource('FakeEconomyAPI.phar');
+                rename($this->getDataFolder().'FakeEconomyAPI.phar', $this->getServer()->getPluginPath().'FakeEconomyAPI.phar');
+                $this->economyDummy = $this->getServer()->getPluginManager()->loadPlugin($this->getServer()->getPluginPath().'FakeEconomyAPI.phar');
+                $this->getServer()->enablePlugin($this->economyDummy);
+                $this->getLogger()->warning('FakeEconomyAPI has been updated, restart for onebone-economy plugins to work.');
+                /** Set bridge version */
+                $this->getConfig()->set('bridgeVersion', self::BRIDGE_VERSION);
+                $this->saveConfig();
+            }
             $this->economyDummy = $this->getServer()->getPluginManager()->getPlugin('EconomyAPI');
         }
 
