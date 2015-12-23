@@ -45,7 +45,7 @@ class GiveMoneyCommand implements CommandExecutor {
             return true;
         }
 
-        $amount = floatval($amount);
+        $amount = (float) $amount;
 
         # Stop pointless transactions or attempted exploitation.
         if($amount <= 0) {
