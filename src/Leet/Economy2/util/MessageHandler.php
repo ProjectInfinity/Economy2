@@ -47,7 +47,7 @@ class MessageHandler {
         $this->balance_sent = $this->parseColors($plugin->getConfig()->getNested('messages.balance.sent', '%yellow%You sent %green%%s %yellow%%s to %green%%s'));
         $this->balance_received = $this->parseColors($plugin->getConfig()->getNested('messages.balance.received', '%green%%s %yellow%sent you %green%%s %yellow%%s'));
         $this->balance_reduced = $this->parseColors($plugin->getConfig()->getNested('messages.balance.reduced', '%yellow%%s took %green%%s %yellow%%s from you'));
-        $this->balance_given = $this->parseColors($plugin->getConfig()->getNested('messages.balance.given', '%green%%s%yellow%\'s balance has been set to %green%%s %yellow%%s'));
+        $this->balance_given = $this->parseColors($plugin->getConfig()->getNested('messages.balance.given', '%green%%s %yellow%%s was given to %green%%s'));
         $this->balance_set = $this->parseColors($plugin->getConfig()->getNested('messages.balance.set', '%green%%s%yellow%\'s balance has been set to %green%%s'));
         $this->balance_changed = $this->parseColors($plugin->getConfig()->getNested('messages.balance.changed', '%yellow%Your balance has been set to %green%%s %yellow%%s by %green%%s'));
         $this->balance_took = $this->parseColors($plugin->getConfig()->getNested('messages.balance.took', '%yellow%You took %green%%s %yellow%%s from %green%%s'));
