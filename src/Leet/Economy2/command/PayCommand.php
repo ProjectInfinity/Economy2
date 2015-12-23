@@ -46,7 +46,7 @@ class PayCommand implements CommandExecutor {
             return true;
         }
 
-        $amount = floatval($amount);
+        $amount = (float) $amount;
 
         # Stop pointless transactions or attempted exploitation.
         if($amount <= 0) {
@@ -72,7 +72,7 @@ class PayCommand implements CommandExecutor {
 
         # Message the target player if he/she is online.
         if($this->plugin->getServer()->getPlayer($target) !== null) {
-            $target->sendMessage(sprintf($this->plugin->getMessageHandler()->balance_changed, $sender->getName(),
+            $target->sendMessage(sprintf($this->plugin->getMessageHandler()->balance_received, $sender->getName(),
                 $amount, ($amount > 1) ? $this->money->getPluralName() : $this->money->getSingularName()));
         }
 
