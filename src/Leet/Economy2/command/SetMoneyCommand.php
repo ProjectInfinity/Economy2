@@ -56,7 +56,7 @@ class SetMoneyCommand implements CommandExecutor {
 
         # Message the target player if he/she is online.
         if($this->plugin->getServer()->getPlayer($target) !== null) {
-            $target->sendMessage(sprintf($this->plugin->getMessageHandler()->balance_received, number_format($balance, 2),
+            $target->sendMessage(sprintf($this->plugin->getMessageHandler()->balance_changed, number_format($balance, 2),
                 ($balance > 1) ? $this->money->getPluralName() : $this->money->getSingularName(), $sender->getName()));
         }
 
