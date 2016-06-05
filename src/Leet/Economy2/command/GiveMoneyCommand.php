@@ -58,11 +58,11 @@ class GiveMoneyCommand implements CommandExecutor {
         $sender->sendMessage(sprintf($this->plugin->getMessageHandler()->balance_given, number_format($amount, 2),
             ($amount > 1) ? $this->money->getPluralName() : $this->money->getSingularName(), $target));
 
-        $target = $this->plugin->getServer()->getPlayer($target);
+        $targetPlayer = $this->plugin->getServer()->getPlayer($target);
 
         # Message the target player if he/she is online.
-        if($this->plugin->getServer()->getPlayer($target) !== null) {
-            $target->sendMessage(sprintf($this->plugin->getMessageHandler()->balance_received, number_format($amount, 2),
+        if($targetPlayer !== null) {
+            $targetPlayer->sendMessage(sprintf($this->plugin->getMessageHandler()->balance_received, number_format($amount, 2),
                 ($amount > 1) ? $this->money->getPluralName() : $this->money->getSingularName(), $target));
         }
 
