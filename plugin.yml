@@ -1,6 +1,6 @@
 name: Economy2
 main: Leet\Economy2\Economy2
-version: 0.1.1
+version: 1.0.0
 api: [2.0.0]
 author: ProjectInfinity
 commands:
