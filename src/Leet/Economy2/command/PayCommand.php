@@ -31,8 +31,8 @@ class PayCommand implements CommandExecutor {
             return true;
         }
 
-        $target = $args[0];
-        $amount = $args[1];
+        $target = implode(' ', array_slice($args, 0, count($args) - 1, true));
+        $amount = $args[count($args) - 1];
 
         # Stop processing if the player does not exist.
         if(!$this->money->playerExists($target)) {
@@ -71,7 +71,7 @@ class PayCommand implements CommandExecutor {
         $target = $this->plugin->getServer()->getPlayer($target);
 
         # Message the target player if he/she is online.
-        if($this->plugin->getServer()->getPlayer($target) !== null) {
+        if($target !== null) {
             $target->sendMessage(sprintf($this->plugin->getMessageHandler()->balance_received, $sender->getName(),
                 $amount, ($amount > 1) ? $this->money->getPluralName() : $this->money->getSingularName()));
         }

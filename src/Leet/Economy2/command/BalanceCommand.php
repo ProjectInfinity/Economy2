@@ -29,11 +29,15 @@ class BalanceCommand implements CommandExecutor {
 
         # Check if the player is attempting to view another player's balance.
         $own = (count($args) > 0) ? false : true;
+        
+        $target = '';
+        
+        if(!$own) $target = strtolower(implode(' ', array_slice($args, 0, count($args), true)));
 
         # Check if specified user is sender. If so $own should be true.
-        if(!$own and strtolower($args[0]) === strtolower($sender->getName())) $own = true;
+        if(!$own and $target === strtolower($sender->getName())) $own = true;
 
-        $balance = $this->money->getBalance($own ? $sender->getName() : $args[0], $own ? true : $this->plugin->getServer()->getPlayer($args[0]) !== null);
+        $balance = $this->money->getBalance($own ? $sender->getName() : $target, $own ? true : $this->plugin->getServer()->getPlayer($target) !== null);
 
         # Player does not exist.
         if($balance === null) {
@@ -48,7 +52,7 @@ class BalanceCommand implements CommandExecutor {
         if($own) {
             $sender->sendMessage(sprintf($this->messages->balance_own, number_format($balance, 2), ($plural) ? $this->money->getPluralName() : $this->money->getSingularName()));
         } else {
-            $sender->sendMessage(sprintf($this->messages->balance_other, $args[0], number_format($balance, 2), ($plural) ? $this->money->getPluralName() : $this->money->getSingularName()));
+            $sender->sendMessage(sprintf($this->messages->balance_other, $target, number_format($balance, 2), ($plural) ? $this->money->getPluralName() : $this->money->getSingularName()));
         }
 
         return true;

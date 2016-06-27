@@ -30,8 +30,8 @@ class GiveMoneyCommand implements CommandExecutor {
             return true;
         }
 
-        $target = $args[0];
-        $amount = $args[1];
+        $target = implode(' ', array_slice($args, 0, count($args) - 1, true));
+        $amount = $args[count($args) - 1];
 
         # Stop processing if the player does not exist.
         if(!$this->money->playerExists($target)) {
@@ -62,8 +62,8 @@ class GiveMoneyCommand implements CommandExecutor {
 
         # Message the target player if he/she is online.
         if($targetPlayer !== null) {
-            $targetPlayer->sendMessage(sprintf($this->plugin->getMessageHandler()->balance_received, number_format($amount, 2),
-                ($amount > 1) ? $this->money->getPluralName() : $this->money->getSingularName(), $target));
+            $targetPlayer->sendMessage(sprintf($this->plugin->getMessageHandler()->balance_received, $target, number_format($amount, 2).
+                (($amount > 1) ? $this->money->getPluralName() : $this->money->getSingularName())));
         }
 
         $this->plugin->getServer()->getPluginManager()->callEvent(new GiveMoneyEvent($this->plugin, $sender->getName(), $target, $amount));
