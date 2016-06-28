@@ -30,8 +30,8 @@ class SetMoneyCommand implements CommandExecutor {
             return true;
         }
 
-        $target = $args[0];
-        $balance = $args[1];
+        $target = implode(' ', array_slice($args, 0, count($args) - 1, true));
+        $balance = $args[count($args) - 1];
 
         # Stop processing if the player does not exist.
         if(!$this->money->playerExists($target)) {
@@ -55,7 +55,7 @@ class SetMoneyCommand implements CommandExecutor {
         $target = $this->plugin->getServer()->getPlayer($target);
 
         # Message the target player if he/she is online.
-        if($this->plugin->getServer()->getPlayer($target) !== null) {
+        if($target!== null) {
             $target->sendMessage(sprintf($this->plugin->getMessageHandler()->balance_changed, number_format($balance, 2),
                 ($balance > 1) ? $this->money->getPluralName() : $this->money->getSingularName(), $sender->getName()));
         }
