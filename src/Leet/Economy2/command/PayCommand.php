@@ -68,11 +68,11 @@ class PayCommand implements CommandExecutor {
         $sender->sendMessage(sprintf($this->plugin->getMessageHandler()->balance_sent, $amount,
             ($amount > 1) ? $this->money->getPluralName() : $this->money->getSingularName(), $target));
 
-        $target = $this->plugin->getServer()->getPlayer($target);
+        $targetPlayer = $this->plugin->getServer()->getPlayer($target);
 
         # Message the target player if he/she is online.
-        if($target !== null) {
-            $target->sendMessage(sprintf($this->plugin->getMessageHandler()->balance_received, $sender->getName(),
+        if($targetPlayer !== null) {
+            $targetPlayer->sendMessage(sprintf($this->plugin->getMessageHandler()->balance_received, $sender->getName(),
                 $amount, ($amount > 1) ? $this->money->getPluralName() : $this->money->getSingularName()));
         }
 

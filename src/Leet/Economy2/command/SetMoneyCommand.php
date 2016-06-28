@@ -52,11 +52,11 @@ class SetMoneyCommand implements CommandExecutor {
         $sender->sendMessage(sprintf($this->plugin->getMessageHandler()->balance_set, $target,
             number_format($balance, 2), ($balance > 1) ? $this->money->getPluralName() : $this->money->getSingularName(), $target));
 
-        $target = $this->plugin->getServer()->getPlayer($target);
+        $targetPlayer = $this->plugin->getServer()->getPlayer($target);
 
         # Message the target player if he/she is online.
-        if($target!== null) {
-            $target->sendMessage(sprintf($this->plugin->getMessageHandler()->balance_changed, number_format($balance, 2),
+        if($targetPlayer !== null) {
+            $targetPlayer->sendMessage(sprintf($this->plugin->getMessageHandler()->balance_changed, number_format($balance, 2),
                 ($balance > 1) ? $this->money->getPluralName() : $this->money->getSingularName(), $sender->getName()));
         }
 
