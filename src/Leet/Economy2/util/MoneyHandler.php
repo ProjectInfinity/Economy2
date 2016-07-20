@@ -46,6 +46,12 @@ class MoneyHandler {
             }
         }
 
+        if(is_array($p)) {
+            $this->plugin->getLogger()->alert($player.'\'s balance is an Array. Resetting balance to 0.');
+            $this->setBalance($player, 0);
+            return 0.00;
+        }
+
         if(!is_float($p) AND !is_int($p)) {
             $this->plugin->getLogger()->error('The balance for '.$player.' is not a float or a integer');
             return null;

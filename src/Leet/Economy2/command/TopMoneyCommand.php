@@ -30,6 +30,11 @@ class TopMoneyCommand implements CommandExecutor {
 
         $i = 1;
         foreach($top as $player => $balance) {
+            if(is_array($balance)) {
+                $this->plugin->getLogger()->alert($player.'\'s balance is an Array. Resetting balance to 0.');
+                $this->money->setBalance($player, 0);
+                $balance = 'Got caught exploiting :(';
+            }
             $sender->sendMessage(sprintf($this->plugin->getMessageHandler()->balance_top, $i, $player, $balance,
                 ($balance > 1) ? $this->money->getPluralName() : $this->money->getSingularName()));
             $i++;
