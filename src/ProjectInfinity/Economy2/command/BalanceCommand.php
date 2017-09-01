@@ -20,7 +20,7 @@ class BalanceCommand implements CommandExecutor {
         $this->messages = $plugin->getMessageHandler();
     }
 
-    public function onCommand(CommandSender $sender, Command $command, $label, array $args) {
+    public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool {
 
         if(!$sender->hasPermission('economy2.command.balance') or !($sender instanceof Player)) {
             $sender->sendMessage($this->plugin->getMessageHandler()->no_permission);
