@@ -1,8 +1,8 @@
 <?php
 
-namespace Leet\Economy2\util;
+namespace ProjectInfinity\Economy2\util;
 
-use Leet\Economy2\Economy2;
+use ProjectInfinity\Economy2\Economy2;
 use pocketmine\utils\Config;
 
 class MoneyHandler {

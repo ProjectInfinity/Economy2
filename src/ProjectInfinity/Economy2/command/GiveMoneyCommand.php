@@ -1,14 +1,14 @@
 <?php
 
-namespace Leet\Economy2\command;
+namespace ProjectInfinity\Economy2\command;
 
-use Leet\Economy2\Economy2;
-use Leet\Economy2\event\money\SetMoneyEvent;
+use ProjectInfinity\Economy2\Economy2;
+use ProjectInfinity\Economy2\event\money\GiveMoneyEvent;
 use pocketmine\command\Command;
 use pocketmine\command\CommandExecutor;
 use pocketmine\command\CommandSender;
 
-class SetMoneyCommand implements CommandExecutor {
+class GiveMoneyCommand implements CommandExecutor {
 
     private $plugin, $money;
 
@@ -19,7 +19,7 @@ class SetMoneyCommand implements CommandExecutor {
 
     public function onCommand(CommandSender $sender, Command $command, $label, array $args) {
 
-        if(!$sender->hasPermission('economy2.command.setmoney')) {
+        if(!$sender->hasPermission('economy2.command.givemoney')) {
             $sender->sendMessage($this->plugin->getMessageHandler()->no_permission);
             return true;
         }
@@ -31,7 +31,7 @@ class SetMoneyCommand implements CommandExecutor {
         }
 
         $target = implode(' ', array_slice($args, 0, count($args) - 1, true));
-        $balance = $args[count($args) - 1];
+        $amount = $args[count($args) - 1];
 
         # Stop processing if the player does not exist.
         if(!$this->money->playerExists($target)) {
@@ -40,27 +40,33 @@ class SetMoneyCommand implements CommandExecutor {
         }
 
         # Stop processing if the specified amount is not numeric.
-        if(!is_numeric($balance)) {
+        if(!is_numeric($amount)) {
             $sender->sendMessage($this->plugin->getMessageHandler()->amount_invalid);
             return true;
         }
 
-        $balance = (float) $balance;
+        $amount = (float) $amount;
 
-        $this->money->setBalance($target, $balance);
+        # Stop pointless transactions or attempted exploitation.
+        if($amount <= 0) {
+            $sender->sendMessage($this->plugin->getMessageHandler()->amount_invalid);
+            return true;
+        }
 
-        $sender->sendMessage(sprintf($this->plugin->getMessageHandler()->balance_set, $target,
-            number_format($balance, 2), ($balance > 1) ? $this->money->getPluralName() : $this->money->getSingularName(), $target));
+        $this->money->alterBalance($target, $amount);
+
+        $sender->sendMessage(sprintf($this->plugin->getMessageHandler()->balance_given, number_format($amount, 2),
+            ($amount > 1) ? $this->money->getPluralName() : $this->money->getSingularName(), $target));
 
         $targetPlayer = $this->plugin->getServer()->getPlayer($target);
 
         # Message the target player if he/she is online.
         if($targetPlayer !== null) {
-            $targetPlayer->sendMessage(sprintf($this->plugin->getMessageHandler()->balance_changed, number_format($balance, 2),
-                ($balance > 1) ? $this->money->getPluralName() : $this->money->getSingularName(), $sender->getName()));
+            $targetPlayer->sendMessage(sprintf($this->plugin->getMessageHandler()->balance_received, $target, number_format($amount, 2).
+                (($amount > 1) ? $this->money->getPluralName() : $this->money->getSingularName())));
         }
 
-        $this->plugin->getServer()->getPluginManager()->callEvent(new SetMoneyEvent($this->plugin, $sender->getName(), $target, $balance));
+        $this->plugin->getServer()->getPluginManager()->callEvent(new GiveMoneyEvent($this->plugin, $sender->getName(), $target, $amount));
 
         return true;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace Leet\Economy2\command;
+namespace ProjectInfinity\Economy2\command;
 
-use Leet\Economy2\Economy2;
-use Leet\Economy2\event\money\TakeMoneyEvent;
+use ProjectInfinity\Economy2\Economy2;
+use ProjectInfinity\Economy2\event\money\TakeMoneyEvent;
 use pocketmine\command\Command;
 use pocketmine\command\CommandExecutor;
 use pocketmine\command\CommandSender;

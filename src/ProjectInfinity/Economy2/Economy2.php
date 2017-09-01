@@ -1,15 +1,15 @@
 <?php
 
-namespace Leet\Economy2;
+namespace ProjectInfinity\Economy2;
 
-use Leet\Economy2\command\BalanceCommand;
-use Leet\Economy2\command\GiveMoneyCommand;
-use Leet\Economy2\command\SetMoneyCommand;
-use Leet\Economy2\command\TakeMoneyCommand;
-use Leet\Economy2\command\TopMoneyCommand;
-use Leet\Economy2\command\PayCommand;
-use Leet\Economy2\util\MessageHandler;
-use Leet\Economy2\util\MoneyHandler;
+use ProjectInfinity\Economy2\command\BalanceCommand;
+use ProjectInfinity\Economy2\command\GiveMoneyCommand;
+use ProjectInfinity\Economy2\command\SetMoneyCommand;
+use ProjectInfinity\Economy2\command\TakeMoneyCommand;
+use ProjectInfinity\Economy2\command\TopMoneyCommand;
+use ProjectInfinity\Economy2\command\PayCommand;
+use ProjectInfinity\Economy2\util\MessageHandler;
+use ProjectInfinity\Economy2\util\MoneyHandler;
 
 use onebone\economyapi\EconomyAPI;
 use pocketmine\plugin\PluginBase;

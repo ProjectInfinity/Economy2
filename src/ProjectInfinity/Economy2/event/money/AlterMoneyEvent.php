@@ -1,9 +1,9 @@
 <?php
 
-namespace Leet\Economy2\event\money;
+namespace ProjectInfinity\Economy2\event\money;
 
-use Leet\Economy2\Economy2;
-use Leet\Economy2\event\Economy2Event;
+use ProjectInfinity\Economy2\Economy2;
+use ProjectInfinity\Economy2\event\Economy2Event;
 
 class AlterMoneyEvent extends Economy2Event {
 

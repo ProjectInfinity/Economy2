@@ -1,8 +1,8 @@
 <?php
 
-namespace Leet\Economy2\event;
+namespace ProjectInfinity\Economy2\event;
 
-use Leet\Economy2\Economy2;
+use ProjectInfinity\Economy2\Economy2;
 use pocketmine\event\Cancellable;
 use pocketmine\event\plugin\PluginEvent;
 

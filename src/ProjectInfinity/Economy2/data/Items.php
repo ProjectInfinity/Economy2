@@ -1,6 +1,6 @@
 <?php
 
-namespace Leet\Economy2\data;
+namespace ProjectInfinity\Economy2\data;
 
 class Items {
 
