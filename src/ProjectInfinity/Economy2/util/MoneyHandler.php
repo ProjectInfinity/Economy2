@@ -52,7 +52,7 @@ class MoneyHandler {
             return 0.00;
         }
 
-        if(!is_float($p) AND !is_int($p)) {
+        if(!is_float($p) && !is_int($p)) {
             $this->plugin->getLogger()->error('The balance for '.$player.' is not a float or a integer');
             return null;
         }
@@ -108,7 +108,7 @@ class MoneyHandler {
      * @param $balance
      * @return bool
      */
-    public function alterBalance($player, $balance) {
+    public function alterBalance($player, $balance): bool {
 
         # Just for the sake of consistency.
         if(is_int($balance)) $balance = (float) $balance;
@@ -129,9 +129,7 @@ class MoneyHandler {
         if($p === null) return false;
 
         # Player cannot afford it.
-        if($balance < 0) {
-            if(($p - $balance) < 0) return false;
-        }
+        if($balance < 0 || ($p - $balance) < 0) return false;
 
         $this->data->setNested('balance.'.$player, ($balance > 0) ? $p + $balance : $p - abs($balance));
 
