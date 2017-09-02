@@ -105,33 +105,42 @@ class MoneyHandler {
      * Alters the balance of the player.
      *
      * @param $player
-     * @param $balance
+     * @param $amount
      * @return bool
      */
-    public function alterBalance($player, $balance): bool {
+    public function alterBalance($player, $amount): bool {
 
         # Just for the sake of consistency.
-        if(is_int($balance)) $balance = (float) $balance;
+        if(is_int($amount)) $amount = (float) $amount;
 
-        if(!is_float($balance)) {
-            $this->plugin->getLogger()->error('Could not alter balance for '.$player.', '.$balance.' is not a float');
+        if(!is_float($amount)) {
+            $this->plugin->getLogger()->error('Could not alter balance for '.$player.', '.$amount.' is not a float');
             return false;
         }
 
         $player = strtolower($player);
 
         # Just return if the balance is 0.
-        if($balance == 0) return false;
+        if($amount == 0) return false;
+
+        $subtract = $amount < 0;
 
         $p = $this->getBalance($player);
 
         # Player does not exist and could not be created.
         if($p === null) return false;
 
-        # Player cannot afford it.
-        if($balance < 0 || ($p - $balance) < 0) return false;
+        if($subtract) {
+            $p -= abs($amount);
+            # Don't allow putting the player into debt.
+            if($p < 0) return false;
+        } else {
+            # Disallow adding negative numbers or zero.
+            if($amount <= 0) return false;
+            $p += $amount;
+        }
 
-        $this->data->setNested('balance.'.$player, ($balance > 0) ? $p + $balance : $p - abs($balance));
+        $this->data->setNested('balance.'.$player, $p);
 
         $this->save();
 
