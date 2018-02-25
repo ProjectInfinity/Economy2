@@ -20,10 +20,3 @@
 | economy2.command.setmoney | /setmoney [player] [balance]
 | economy2.command.takemoney |  /takemoney [player] [amount]
 | economy2.command.topmoney | /topmoney
-| economy2.command.balance | /balance
-| economy2.command.pay | /pay
-| economy2.command.givemoney | /givemoney
-| economy2.command.setmoney | /setmoney
-| economy2.command.takemoney | /takemoney
-| economy2.command.topmoney | /topmoney
-|
