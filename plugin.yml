@@ -1,7 +1,7 @@
 name: Economy2
 main: ProjectInfinity\Economy2\Economy2
 version: 1.1.1
-api: [3.0.0-ALPHA6, 3.0.0-ALPHA7]
+api: [3.0.0-ALPHA10, 3.0.0-ALPHA11]
 author: ProjectInfinity
 commands:
   balance:
