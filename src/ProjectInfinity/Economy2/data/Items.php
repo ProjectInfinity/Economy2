@@ -456,6 +456,7 @@ class Items {
         '403:0' => 'enchantedbook',
         '405:0' => 'netherbrick',
         '406:0' => 'netherquartz',
+		'410:0' => 'hopper',
         '414:0' => 'rabbitfoot',
         '438:0' => 'splashpotion',
         '457:0' => 'beetroot',
