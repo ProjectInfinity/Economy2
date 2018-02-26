@@ -1,5 +1,4 @@
---- # Poggit-CI Manifest. Open the CI at 
-https://github.com/ProjectInfinity/Economy2
+--- # Poggit-CI Manifest. Open the CI at https://github.com/ProjectInfinity/Economy2
 branches:
 - master
 projects:
