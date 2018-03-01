@@ -30,3 +30,10 @@ Economy 2 provides your pocketmine-mp server with a fully functional economy, by
 | --- | --- |
 | Economy2Shop| https://github.com/ProjectInfinity/Economy2Shop
 | PocketLotto | https://github.com/ProjectInfinity/PocketLotto
+| Rankup      | https://poggit.pmmp.io/p/RankUp/0.4.0
+| ONEBONE Plugins| All EconomyAPI plugins work with Economy2
+| EconomyShop | https://poggit.pmmp.io/p/EconomyShop/2.0.8-7
+| EconomyPShop| https://poggit.pmmp.io/p/EconomyPShop/2.0.2-6
+| EconomyLand | https://poggit.pmmp.io/p/EconomyLand/2.1.1-4
+| EconomySell | https://poggit.pmmp.io/p/EconomySell/2.0.7-5
+| EconomyJob  | https://poggit.pmmp.io/p/EconomyJob/2.0.4-4
