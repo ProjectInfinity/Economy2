@@ -139,6 +139,7 @@ class Items {
             '134:0' => 'sprucestairs',
             '135:0' => 'birchstairs',
             '136:0' => 'junglestairs',
+			'138:0' => 'beacon',
             '156:0' => 'quartzstairs',
             '164:0' => 'darkoakstairs',
             #'180:0' => 'redsandstairs',
